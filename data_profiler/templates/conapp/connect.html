@@ -1,0 +1,44 @@
+{% extends 'base1.html' %}
+{% block title %}Connect to Database{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Connect to Database</h3></div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="username" type="text" name="username" placeholder="Username" Required/>
+                                <label for="username">Username</label>
+                            </div>
+                            
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="host" type="text" name="host" placeholder="Host" Required/>
+                                <label for="host">Host</label>
+                            </div>
+                            
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="password" type="password" name="password" placeholder="Password" Required />
+                                <label for="password">Password</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="confirm_password" type="password" name="confirm_password" placeholder="Confirm Password" Required />
+                                <label for="confirm_password">Confirm Password:</label>
+                            </div>
+                        
+                            
+                            <button type="submit" class="btn btn-primary">Connect</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

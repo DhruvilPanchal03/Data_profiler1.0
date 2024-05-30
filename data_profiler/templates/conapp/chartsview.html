@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Charts{% endblock %}
+
+{% block content %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Charts</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'table_view'%}">Tables</a></li>
+            <li class="breadcrumb-item active">Charts</li>
+        </ol>
+    
+        
+        <div class="card center mb-4">
+            
+                <div class="card center px-4" >
+                    </div>
+        </div>
+        <div class="container-fluid px-4" >
+
+            <!-- Unique Values Count Bar Chart -->
+            <div id="unique_values_count_chart"></div>
+
+            <!-- Null Values Percentage Pie Chart -->
+            <div id="null_values_percentage_chart"></div>
+
+            <!-- Standard Deviation Bar Chart -->
+            <div id="std_per_column_chart"></div>
+
+            <!-- Box Plot -->
+            <div id="box_plot_chart"></div>     
+
+            <script>
+                // Parse JSON data for each chart
+                var uniqueValuesCountData = JSON.parse("{{ unique_values_count_json|escapejs }}");
+                var nullValuesPercentageData = JSON.parse("{{ null_values_percentage_json|escapejs }}");
+                var stdPerColumnData = JSON.parse("{{ std_per_column_json|escapejs }}");
+                var boxPlotData = JSON.parse("{{ box_plot_json|escapejs }}");
+
+                // Render each chart
+                Plotly.newPlot('unique_values_count_chart', uniqueValuesCountData.data, uniqueValuesCountData.layout);
+                Plotly.newPlot('null_values_percentage_chart', nullValuesPercentageData.data, nullValuesPercentageData.layout);
+                Plotly.newPlot('std_per_column_chart', stdPerColumnData.data, stdPerColumnData.layout);
+                Plotly.newPlot('box_plot_chart', boxPlotData.data, boxPlotData.layout);
+            </script>
+        </div>
+        
+            
+        
+    </div>
+</main>
+{% endblock %}

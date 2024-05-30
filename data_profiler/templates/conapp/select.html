@@ -1,0 +1,112 @@
+{% extends 'base1.html' %}
+{% block title %}Select a Connector{% endblock %}
+
+{% block content %}
+
+<style>
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    label {
+        font-weight: bold;
+    }
+    select, input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #3578cf;
+    }
+</style>
+
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Select a Connector</h3></div>
+                    <div class="container">
+                        <form action="{% url 'connector_details' %}" method="post">
+                            {% csrf_token %}
+                            <label for="connector">Choose a connector:</label>
+                            <select id="connector" name="connector">
+                                {% for connector in connectors %}
+                                    <option value="{{ connector }}">{{ connector }}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+            const fileUploadContainer = document.getElementById('file-upload-container');
+    
+            // Prevent default drag behaviors
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                fileUploadContainer.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false);
+            });
+    
+            // Highlight drop area when file is dragged over it
+            ['dragenter', 'dragover'].forEach(eventName => {
+                fileUploadContainer.addEventListener(eventName, highlight, false);
+            });
+    
+            // Unhighlight drop area when file is dragged away from it
+            ['dragleave', 'drop'].forEach(eventName => {
+                fileUploadContainer.addEventListener(eventName, unhighlight, false);
+            });
+    
+            // Handle dropped files
+            fileUploadContainer.addEventListener('drop', handleDrop, false);
+    
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+    
+            function highlight() {
+                fileUploadContainer.classList.add('dragover');
+            }
+    
+            function unhighlight() {
+                fileUploadContainer.classList.remove('dragover');
+            }
+    
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+    
+                handleFiles(files);
+            }
+    
+            function handleFiles(files) {
+                // Handle uploaded files here, if needed
+            }
+        </script>
+
+{% endblock %}

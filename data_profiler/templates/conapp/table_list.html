@@ -1,0 +1,33 @@
+{% extends 'base1.html' %}
+{% block title %}Table List{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Table List</h3></div>
+                    <div class="card-body">
+                        <ul>
+                            <form action="{% url 'show_table_data' %}" method="GET">
+                                {% csrf_token %}
+                                <fieldset>
+                                {% for table in tables %}
+                                <label>
+                                    <input type="checkbox" name="tables" value="{{ table }}">
+                                    {{ table }}
+                                </label><br>
+                                {% endfor %}
+                                </fieldset>
+                                <button type="submit" class="btn btn-primary mt-3">Calculate Metrics</button>
+                            </form>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

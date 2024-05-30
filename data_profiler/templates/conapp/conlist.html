@@ -1,0 +1,29 @@
+{% extends 'base1.html' %}
+{% block title %}DataBase List{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">DataBase List</h3></div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'selectdatabase' %}">
+                            {% csrf_token %}
+                            <label for="selecteddatabase">Select Database:</label>
+                            <select name="selecteddatabase" id="selecteddatabase">
+                                {% for database in db %}
+                                    <option value="{{ database }}">{{ database }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit">Select</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
